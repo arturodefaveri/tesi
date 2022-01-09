@@ -1,2 +1,2 @@
-# tesi
+# Tesi
 My bachelor's thesis 
