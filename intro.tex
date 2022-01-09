@@ -1,0 +1,99 @@
+\chapter{Introduction}
+
+Model theory is one of the main branches of mathematical logic. 
+Broadly speaking, it deals with the relationships between formal sentences and their interpretations in mathematical structures, such as groups, orderings and graphs. 
+A good deal of interesting structures is finite: think about finite groups or graphs. 
+Historically, however, the model theory of finite structures has been somehow neglected, especially compared to the intense study that their infinite counterparts aroused. 
+One of the reasons of this phenomenon is technical: lots of key results and tools of standard model theory (compactness theorem, L\"owenheim-Skolem theorems, ultraproducts method) don't apply to finite structures
+\footnote{One could even say that model theorists hate finite models.}. 
+This work outlines a couple of methods to investigate finite structures in first-order languages, and a few applications of these results.
+
+The subject of the first chapter will be, however, a tool of model theory that does apply to infinite structures: the Ehrenfeucht-Fra\"iss\'e games. 
+First of all, two structures $\mathcal{M}$ and $\mathcal{N}$ are said to be \emph{equivalent} if they satisfy the same sentences. 
+This is in general weaker than requiring $\mathcal{M}$ and $\mathcal{N}$ to be isomorphic. 
+A French logician, Roland Fra\"iss\'e, saw that the logical notion of equivalence is reducible to the purely algebraic notion of \emph{partial} isomorphism. 
+His proof employs the celebrated method of \emph{back-and-forth}, which Cantor used to establish that any two countable densely ordered sets are isomorphic. 
+To study finite structures the concept of equivalence is too broad: we are not interested in speaking about arbitrarily large set of objects, but just about a finite collection. 
+We could, for instance, limit the number of variables we are using. 
+The (standard) strategy followed here is to limit the depth of the quantifier prefix of a sentence. 
+Suppose we are given two graphs $\mathcal{M}$ and $\mathcal{N}$, and we would like to know whether $\mathcal{M}$ and $\mathcal{N}$ satisfy the same sentences or not. 
+We call in two friends, Spoiler and Duplicator, to settle the dispute with a game on $m$ rounds. 
+In each round Spoiler, who is convinced that $\mathcal{M}$ and $\mathcal{N}$ can be told apart, chooses a vertex from one (and always the same) of the two graphs. 
+Duplicator, after the move of Spoiler, picks a vertex from the other graph. 
+At the end of the rounds, two $m$-length sequences have been chosen: $(s_1, \ldots, s_m)$ by Spoiler and $(d_1, \ldots, d_m)$ by Duplicator. 
+These sequences form induced subgraphs of $\mathcal{M}$ and $\mathcal{N}$. 
+If, in a sense that we shall make precise, these two subgraphs have the same `behavior' in $\mathcal{M}$ and $\mathcal{N}$, then Duplicator wins. 
+We shall see that this means that there is no sentence of quantifier depth $m$ through which we could distinguish $\mathcal{M}$ from $\mathcal{N}$. 
+In the other case, it is Spoiler to win. 
+
+
+These games yield a \emph{complete} methodology to show that first-order logic is unable to express some properties of finite structures: parity and connectedness of graphs being the most important examples. 
+What we gather is that first-order logic is generally unable to describe certain \emph{global} properties of structures. 
+ 
+
+While in the first chapter we adapted a method occurring in some `infinite' model theoretic arguments, in the second we introduce an idea that originates in the realm of finite models. 
+It appeared in Ron Fagin's seminal paper \cite{fagin_prob}. 
+Given a set of vertices $A_n =\{v_1, \ldots, v_n\}$ and a certain sentence $\phi$, we could ask 
+\begin{align}
+\label{intro_uno}
+\text{How many graphs there are over $A_n$\footnotemark?
+How many graphs over $A_n$ that satisfy $\phi$?}
+\end{align}
+\footnotetext{We can distinguish each vertex: we are not considering isomorphism classes for now.}
+We can interpret the ratio of this two numbers as the probability $p$ that a graph has a certain property. 
+In other words, we decide to put an edge between $v_j$ and $v_i$ by tossing a fair coin; the probability that this graph, randomly constructed, satisfies $\phi$ is precisely $p$. 
+We can also investigate the asymptotic behavior of this ratio, as $n$ gets larger and larger, and this corresponds to performing the experiment just mentioned on a infinite set of vertices $\{v_1, v_2 , \ldots\}$. 
+This construction can be done `deterministically' as well: take the infinite list of sentences `For any two sets of vertices there is a distinct vertex linked to every element of the first set, and not linked to any element of the second'. 
+It turns out that this theory, modulo the axioms of graphs, is complete and $\omega$-categorical: it admits just one countable model, which we call \emph{random graph}. 
+We shall see that all of what we have been saying applies also to more complex structures than graphs, provided that we consider \emph{relational} and not algebraic structures. %\footnote{groups}.
+This led to a remarkable discovery: for every sentence $\phi$ either almost all finite structures satisfies $\phi$ or almost all finite structures satisfies $\lnot \phi$. 
+We express this fact by saying that first-order logic obeys the \emph{0-1 law}. Some interesting consequences can be derived; for example, asymptotically, any two finite structures satisfy the same sentences of quantifier rank $m$. 
+Moreover, in a sense, we can enhance the expressive power of first-order languages, the paradigmatic case being connectedness. 
+We said that it is a property of (infinite and finite) graphs that first-order logic cannot capture; there is however a property that implies connectedness and \emph{almost} all finite graphs have.
+
+
+The second step is to retrace the path so far followed asking the question (\ref{intro_uno}) investigating structures up to isomorphism. 
+Does first-order logic obey the 0-1 law in this case as well? The answer is `yes' but a bit of work has to be done. 
+At this point the notion of rigidity starts to play a prominent role. 
+A structure is rigid if its automorphism group is trivial. 
+If almost all structures are rigid then there is no difference in distinguishing each single structure or considering equivalence classes by isomorphism. 
+The point is that a structure $\mathcal{M}$ that is relational in a nontrivial sense, i.e. we endow $\mathcal{M}$ with at least one binary relation, is almost surely rigid. 
+The proof of this claim is rather involved; the calculations were done for the first time by Fagin \cite{fagin_rel}. 
+The remaining case is not difficult, and is treated separately, so that we can \emph{always} study probabilities of models up to isomorphism. 
+
+The third chapter discusses some of the applications of finite model theory. 
+Finite model theory revealed itself extraordinary useful in computer science: above all in database theory but also in complexity theory. 
+We concentrate on applications to classic logic problems. 
+For instance, given a first-order sentence $\phi$, we could ask what are the natural numbers that occur as the size of finite models of $\phi$. 
+Such a set of numbers is called a spectrum for $\phi$. 
+Sometimes one needs not be an outstanding logician to find spectra: it is enough to know elementary facts about algebraic fields to recognize that the integers of the kind $p^n$, where $p$ is prime and $n\in \mathbb{N}$, are a spectrum. 
+Generally, however, the task of establishing whether a given set is a spectrum is quite hard, and there are basic facts that still we do not know. 
+For example G\"unter Asser in 1955 asked whether spectra are closed under complementation. 
+This question, although it helped to develop much of finite model and descriptive complexity theory, remains unanswered. 
+One usually restricts the attention to sentences involving specific set of relation and function symbols. 
+Fagin \emph{et al.} proved in \cite{spectra1} that the spectra involving only a unary function are exactly the eventually periodic sets. 
+
+Another of these problems is decidability. 
+A set $A$ is said to be decidable if there is an algorithm that runs in a finite amount of time and decides whether a given element belongs to $A$ or not. 
+This is how decidability pops up in logic: given a class $\Gamma$ of first order sentences find an algorithm to decide whether each sentence of $\Gamma$ is satisfiable or not. 
+(This is more or less the celebrated \emph{Entscheidungsproblem} posed by David Hilbert and Wilhelm Ackermann to the mathematical community in 1928). 
+What does finite model theory have to say concerning the decision problem? 
+It's easy to see that if every satisfiable sentence in $\Gamma$ admits a finite model, then $\Gamma$ is decidable: if the non-logical symbols involved in $\Gamma$ are finite, the problem that a given finite structure is a model of a given first-order sentence is decidable; moreover, the finite structures involving these non-logical symbols are enumerable, i.e. roughly speaking, there is an algorithm that can list all of them. 
+
+A rather simple example of this phenomenon is the class of valid
+\footnote{As far as the decision problem is concerned, it makes no difference to speak of valid or satisfiable sentences: $\phi$ is valid iff $\lnot \phi$ is unsatisfiable.} 
+sentences involving only a finite list of unary predicates. The proof of this fact dates back to 1915 and is due to Leopold L\"owenheim. 
+A less trivial example is given by the class of valid sentences with prefix $\forall^2 \exists^{\ast}$ and without equality. 
+Kurt G\"odel devised an intricate and sophisticated proof in 1932
+\footnote{L\'aszl\'o Kalm\'ar and Kurt Sch\"utte proved independently this result in 1933 and 1934, respectively.}. 
+In his argument G\"odel defined a necessary condition for a $\forall^2 \exists^{\ast}$-sentence $\psi$ to be satisfiable and showed that this condition is also sufficient for finite satisfiability. 
+Yuri Gurevich and Saharon Shelah \cite{shelah} found a much smoother proof: the sufficiency part can be done building a random structure that satisfies $\lnot \psi$ with null asymptotic probability. 
+
+The last example is less mathematically inspired, and concerns the relationship between logic and machines. 
+Regular languages are those strings that a finite state automaton recognizes. 
+We ask if there is a way to characterize this class of strings in purely logical terms. 
+Unfortunately, as logic for us means first-order logic, this is not the case. 
+For example, automata aren't able to count fully. 
+Nevertheless, they can do some nontrivial counting: they can recognize an equivalence class modulo $n$. 
+First-order logic lacks even this: a first-order sentence cannot tell the difference between a set with an even and a set with an odd cardinality. 
+We show that first-order logic can, however, characterize a weaker class of languages. 
