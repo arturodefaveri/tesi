@@ -4,8 +4,7 @@ Model theory is one of the main branches of mathematical logic.
 Broadly speaking, it deals with the relationships between formal sentences and their interpretations in mathematical structures, such as groups, orderings and graphs. 
 A good deal of interesting structures is finite: think about finite groups or graphs. 
 Historically, however, the model theory of finite structures has been somehow neglected, especially compared to the intense study that their infinite counterparts aroused. 
-One of the reasons of this phenomenon is technical: lots of key results and tools of standard model theory (compactness theorem, L\"owenheim-Skolem theorems, ultraproducts method) don't apply to finite structures
-\footnote{One could even say that model theorists hate finite models.}. 
+One of the reasons of this phenomenon is technical: lots of key results and tools of standard model theory (compactness theorem, L\"owenheim-Skolem theorems, ultraproducts method) don't apply to finite structures\footnote{One could even say that model theorists hate finite models.}. 
 This work outlines a couple of methods to investigate finite structures in first-order languages, and a few applications of these results.
 
 The subject of the first chapter will be, however, a tool of model theory that does apply to infinite structures: the Ehrenfeucht-Fra\"iss\'e games. 
@@ -38,14 +37,13 @@ Given a set of vertices $A_n =\{v_1, \ldots, v_n\}$ and a certain sentence $\phi
 \label{intro_uno}
 \text{How many graphs there are over $A_n$\footnotemark?
 How many graphs over $A_n$ that satisfy $\phi$?}
-\end{align}
-\footnotetext{We can distinguish each vertex: we are not considering isomorphism classes for now.}
+\end{align}\footnotetext{We can distinguish each vertex: we are not considering isomorphism classes for now.}
 We can interpret the ratio of this two numbers as the probability $p$ that a graph has a certain property. 
 In other words, we decide to put an edge between $v_j$ and $v_i$ by tossing a fair coin; the probability that this graph, randomly constructed, satisfies $\phi$ is precisely $p$. 
 We can also investigate the asymptotic behavior of this ratio, as $n$ gets larger and larger, and this corresponds to performing the experiment just mentioned on a infinite set of vertices $\{v_1, v_2 , \ldots\}$. 
 This construction can be done `deterministically' as well: take the infinite list of sentences `For any two sets of vertices there is a distinct vertex linked to every element of the first set, and not linked to any element of the second'. 
 It turns out that this theory, modulo the axioms of graphs, is complete and $\omega$-categorical: it admits just one countable model, which we call \emph{random graph}. 
-We shall see that all of what we have been saying applies also to more complex structures than graphs, provided that we consider \emph{relational} and not algebraic structures. %\footnote{groups}.
+We shall see that all of what we have been saying applies also to more complex structures than graphs, provided that we consider \emph{relational} and not algebraic structures.
 This led to a remarkable discovery: for every sentence $\phi$ either almost all finite structures satisfies $\phi$ or almost all finite structures satisfies $\lnot \phi$. 
 We express this fact by saying that first-order logic obeys the \emph{0-1 law}. Some interesting consequences can be derived; for example, asymptotically, any two finite structures satisfy the same sentences of quantifier rank $m$. 
 Moreover, in a sense, we can enhance the expressive power of first-order languages, the paradigmatic case being connectedness. 
@@ -80,12 +78,10 @@ This is how decidability pops up in logic: given a class $\Gamma$ of first order
 What does finite model theory have to say concerning the decision problem? 
 It's easy to see that if every satisfiable sentence in $\Gamma$ admits a finite model, then $\Gamma$ is decidable: if the non-logical symbols involved in $\Gamma$ are finite, the problem that a given finite structure is a model of a given first-order sentence is decidable; moreover, the finite structures involving these non-logical symbols are enumerable, i.e. roughly speaking, there is an algorithm that can list all of them. 
 
-A rather simple example of this phenomenon is the class of valid
-\footnote{As far as the decision problem is concerned, it makes no difference to speak of valid or satisfiable sentences: $\phi$ is valid iff $\lnot \phi$ is unsatisfiable.} 
+A rather simple example of this phenomenon is the class of valid\footnote{As far as the decision problem is concerned, it makes no difference to speak of valid or satisfiable sentences: $\phi$ is valid iff $\lnot \phi$ is unsatisfiable.} 
 sentences involving only a finite list of unary predicates. The proof of this fact dates back to 1915 and is due to Leopold L\"owenheim. 
 A less trivial example is given by the class of valid sentences with prefix $\forall^2 \exists^{\ast}$ and without equality. 
-Kurt G\"odel devised an intricate and sophisticated proof in 1932
-\footnote{L\'aszl\'o Kalm\'ar and Kurt Sch\"utte proved independently this result in 1933 and 1934, respectively.}. 
+Kurt G\"odel devised an intricate and sophisticated proof in 1932\footnote{L\'aszl\'o Kalm\'ar and Kurt Sch\"utte proved independently this result in 1933 and 1934, respectively.}. 
 In his argument G\"odel defined a necessary condition for a $\forall^2 \exists^{\ast}$-sentence $\psi$ to be satisfiable and showed that this condition is also sufficient for finite satisfiability. 
 Yuri Gurevich and Saharon Shelah \cite{shelah} found a much smoother proof: the sufficiency part can be done building a random structure that satisfies $\lnot \psi$ with null asymptotic probability. 
 
