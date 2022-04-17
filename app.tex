@@ -1,0 +1,412 @@
+\chapter[Applications]{Applications}
+
+\section{The Spectrum Problem}
+\begin{defn} A subset $S$ of the natural numbers is called a \textbf{spectrum} if there is a vocabulary $\tau$ and a $\tau$-sentence $\phi$ such that 
+$S=\{ \norm{M} : M \models \phi\} $.
+Given a $\tau$-sentence $\phi$ we shall write $\Spec(\phi)$ for the spectrum of $\phi$.
+\end{defn}
+
+For example, let $\tau=\emptyset$. Taking disjunctions of the sentences `there are exactly $n$ elements' every nonempty finite subset is a spectrum. 
+Let $\tau=\{R\}$, $R$ binary, and $\psi$ be the conjunction of the axioms for the theory of equivalence relations with the sentence 
+
+$$\forall x_1 \exists x_2 \ldots \exists x_m \bigwedge_{i < j } (x_i \neq x_j \land Rx_ix_j) \land \lnot \exists x_1 \ldots \exists x_{m+1} \bigwedge_{i < j } (x_i \neq x_j \land Rx_ix_j) \text{,}$$
+
+stating that each equivalence class contains exactly $m$ elements. 
+For each $m \ge 1$ let $S$ be the set of all the positive numbers which are divisible by $m$. 
+Then $S= \Spec(\psi)$.  
+
+Using the results proved in the first chapter, we obtain the following. 
+
+\begin{thm} 
+For any FO $\tau$-sentence $\phi$, $\Spec(\phi)$ or $\Spec(\lnot \phi)$ is cofinite. 
+\begin{proof} 
+Let $\Sigma$ be the set of sentences with (i) `there are at least $n$ elements' ($n \ge 1$), (ii) $\forall x_1 \ldots \forall x_k R x_1 \ldots x_k $ for every $k$-ary $R$ in the vocabulary $ \tau$. 
+$\Sigma$ is satisfiable. 
+Any two models of $\Sigma$ $\mathcal{A}$ and $\mathcal{B}$ are $\omega$-isomorphic via the set $I:=\{ p \in \Part(\mathcal{A}, \mathcal{B}): \norm{\dom(p)} < \infty  \}$, hence elementarily equivalent. 
+Therefore the theory $\Sigma$ is complete.
+Let us say $\Sigma \models \phi$. 
+By compactness there exists a finite $\Sigma_0 \subset \Sigma$ such that $\Sigma_0 \models \phi$. 
+Let $n_0$ be larger than than the $n$ such that the sentences (i) are in $\Sigma_0$.
+Then $\phi$ has a model of cardinality $n$ for every $n \ge n_0$. 
+\end{proof}
+\end{thm}
+
+We could have proved the above theorem by means of the 0-1 law: if $\lambda(\phi)=1$ then there exists $k$ such that for every $n$ greater than $k$ $\lambda_n(\phi)>0$.
+Hence $\phi$ has a model of cardinality $n$, for each $n > k$. 
+Similarly if $\lambda(\lnot \phi)=1$. 
+
+In what follows we restrict our investigation to certain interesting vocabularies. 
+
+\subsubsection{Finite Number of Unary Relation Symbols} 
+
+We start with a rather simple example. 
+Let $\tau=\{P_1, \ldots , P_r\}$ with $P_i$ unary. 
+Recall, by Example \ref{unary}, that every $\tau$-sentence is equivalent to the negation or boolean combination of sentences of the form $\exists ^{=l} x P^{\alpha} x$. 
+Therefore 
+
+\begin{thm} 
+The spectra involving the vocabulary $\{P_1, \ldots , P_r\}$ are precisely the finite and cofinite sets. 
+\end{thm} 
+
+\begin{rem} Given a $\sigma$-structure $\mathcal{A}$, a subset $S \subseteq A$ is elementarily \textbf{definable} in $\mathcal{A}$ if there is a formula $\zeta \in L_1[\sigma]$ such that for all $a \in A$, $\mathcal{A} \models \zeta[a] $ iff $a \in S$. 
+It's well known that the finite and cofinite sets are exactly those definable in $(\mathbb{N}, <)$. 
+Therefore: $S$ is the spectrum of a $\sigma$-sentence iff $S$ is definable in $(\mathbb{N}, <)$.
+\end{rem}
+
+\subsubsection{A Single Unary Function Symbol}
+Spectra involving the vocabulary $\{R\}$, where $R$ is a binary relation symbol, are fairly complex. 
+An intermediate case is given by $\{f\}$, where $f$ is a unary function symbol. 
+We'll show that spectra involving this vocabulary are exactly the ultimately periodic sets. 
+
+Remember that a set $S$  is \textbf{ultimately periodic} if there exist $k$ and $p >0$ such that $n \in S$ iff $n+p\in S$, when $n >k$; remember further that an \textbf{arithmetic sequence} is a sequence $(a_n)_n \in \omega^\omega$ of the form $(m+dn)_n$, where $d$ and $m$ are fixed natural numbers. 
+
+\begin{lem} 
+\label{lemmaf1} 
+$S$ is ultimately periodic iff it is the finite union of arithmetic sequences.
+\begin{proof} 
+If $S$ is the union of arithmetic sequences $(m_i +d_i n)_n$, $i \in I$, with $I$ finite, then define $k$ to be $\max\{m_i : i \in I\}$ and $p$ to be the least common multiple of $d_i$. 
+
+Conversely, if $S$ is an ultimately periodic set, then $S$ is made up by the set $\{n \le k : n \in S\}$ (which is the union of trivial arithmetic sequences with $d=0$) and the union of the arithmetic sequences $(m_i + d_i n)_n$ with $k < m_i \le k+p$ and $m_i \in S$. 
+\end{proof}
+\end{lem}
+
+\begin{lem} \label{lemmaf2} 
+If $S$ is a spectrum involving the vocabulary $\{f\}$ then there are numbers $D$, $k$ such that for each $m \in S$, $m>k$, there is $d$ with $0<d\le D$ such that the sequence $(m+dn)_n \subseteq S$. 
+
+\begin{proof}
+Assume that $S=\Spec(\phi)$ and that $\qr(\phi)=r$. 
+Let $\mathcal{A}$ be a $\{f\}$-structure such that $\mathcal{A} \models \phi$ (i.e. $\norm{A} \in S$) and $\norm{A} \gg 2^{r}$\footnote{This number has to depend only on $r$.}. 
+Put an arrow from $a_i$ to $a_j$ just in case $a_j=f(a_i)$. Then $\mathcal{A}$ is a digraph. 
+Each connected component consists of disjoint trees whose roots\footnote{The \textbf{root} is the vertex of the tree than can be reached by all the other vertices. The natural orientation is thus \emph{towards} the root.}
+form a cycle. 
+For clarity's sake, an example of such a connected component is depicted in Figure \ref{graph}.
+
+\begin{figure}
+\centering
+\usetikzlibrary{arrows.meta}
+\begin{tikzpicture}
+\label{graph}
+\draw[{Circle}-Latex] (0.866,-0.5) -- (0,0); 
+\draw[{Circle}-Latex] (1.831,-0.241) -- (0.866,-0.5);
+\draw[{Circle}-Latex] (1.731,-1) -- (0.866,-0.5);
+\draw[{Circle}-Latex] (1.124,-1.465) -- (0.866,-0.5);
+\draw[{Circle}-Latex] (0,1) -- (0,0);
+\draw[{Circle}-Latex] (-0.866,1.5) -- (0,1);
+\draw[{Circle}-Latex] (-1.732,1) -- (-0.866,1.5);
+\draw[{Circle}-Latex] (-1.732,0) -- (-1.732,1);
+\draw[{Circle}-Latex] (-0.866,-0.5) -- (-1.732,0);
+\draw[{Circle}-Latex] (0,0) -- (-0.866,-0.5);
+\draw[{Circle}-Latex] (-2.732,1) -- (-1.732,1);
+\draw[{Circle}-Latex] (-2.232,1.866) -- (-1.732,1);
+\end{tikzpicture}
+
+\caption{An example of $\{f\}$-structure.}
+\end{figure}
+
+We show that there is a $\{f\}$-structure $\mathcal{B}$ such that $\norm{A}=\norm{B}$, $\mathcal{A} \equiv_r \mathcal{B}$ and: (i) each tree in $\mathcal{B}$ has depth smaller than a constant; (ii) each cycle has length smaller than a constant. 
+
+\begin{claim} There is a constant $c_1$ such that for every tree $\mathcal{T}$ there is a $\{f\}$-structure $\mathcal{B}_1$ such that $\norm{B_1}=\norm{T}$ and: (a) $\mathcal{B}_1 \equiv_r \mathcal{T}$, (b) the trees of $\mathcal{B}_1$ have depth\footnote{We shall call \textbf{depth} the length of the longest path starting from the root and arriving at a terminal vertex.} at most $c_1$.
+\begin{proof} 
+For every $s$ the set of $r$-types $\{\phi^{r} _{\mathbf{t}_s } : \mathbf{t}_s \in T^s\}$ is finite. Let $$v:=\norm{\{\phi^{r-1} _{t} : t \in T\}}\text{.}$$ 
+Let $c_1:=(2^r +1)^v +1$. 
+If the tree $\mathcal{T}$ has depth at most $c_1$ we are done. 
+Otherwise there is a branch of $\mathcal{T}$ on which $t_2, t_4$ lie and such that $\phi^{r-1} _{t_2} = \phi^{r-1} _{t_4}$ and $d(t_2, t_4) > 2^r$. 
+Suppose without loss of generality that there are $t_1$, $t_3$ such that there is an arrow from $t_1$ to $t_2$ and from $t_3$ to $t_4$. 
+(If not we can simply interchange the role of the $t_j$). 
+By construction $\phi^{r-2} _{t_1 t_2} = \phi^{r-2} _{t_3 t_4}$. 
+We cut the arrows from $t_1$ to $t_2$ and from $t_3$ to $t_4$; we add arrows from $t_1$ to $t_4$ and from $t_3$ to $t_2$. 
+This procedure creates a cycle of length at least $2^r$. 
+Let $\mathcal{B}_1$ be the structure obtained. 
+Clearly $\norm{B_1}=\norm{T}$ and the trees of $\mathcal{B}_1$ have depth at most $c_1$. 
+By Examples \ref{acyclic} and \ref{even_order} $\mathcal{B}_1 \equiv_r \mathcal{T}$. 
+\end{proof}
+\end{claim}
+
+\begin{claim}
+There is a constant $c_2$ such that for every cycle $\mathcal{D}$ there is a $\{f\}$-structure $\mathcal{B}_2$ such that $\norm{B_2}=\norm{D}$ and: (a) $\mathcal{B}_2 \equiv_r \mathcal{D}$, (b) the cycles of $\mathcal{B}_2$ have length at most $c_2$. 
+\begin{proof} 
+For every $s$ the set of $r$-types $\{\phi^{r} _{\mathbf{d}_s } : \mathbf{d}_s \in D^s\}$ is finite. 
+Let $$u:=\norm{\{\phi^{r-1} _{d} : d \in D\}}\text{.}$$ 
+Let $c_2:=(2^r +1)^u +2^r +1$. 
+If the cycle $\mathcal{D}$ has length at most $c_2$ we are done. 
+Otherwise there are $d_1, d_3 \in D$ such that $\phi^{r-1} _{d_1} = \phi^{r-1} _{d_3}$ and $d(d_1, d_3) > 2^r +1$. 
+Let $d_2, d_4$ the elements such that there is an arrow from $d_1 $ to $d_2 $ and from $d_3 $ to $d_4$. 
+We cut such arrows and we add arrows from $d_1$ to $d_4$ and from $d_3$ to $d_2$. This procedure creates two shorter cycles.
+Let $\mathcal{B}_2$ be the structure obtained. 
+Clearly $\norm{B_2}=\norm{D}$ and the cycles of $\mathcal{B}_2$ have length at most $c_2$. 
+By Example \ref{connected} $\mathcal{B}_2 \equiv_r \mathcal{D}$. 
+\end{proof}
+\end{claim}
+
+Since the trees of $\mathcal{B}$ are no deeper than $c_1$ and the cycles of $\mathcal{B}$ are no longer than $c_2$, then there is a constant $c$ such that either
+\begin{itemize}
+\item Every connected component is smaller than $c$. In this case there is $c_3$ such that if $\norm{B} >c_3$, then $\mathcal{B}$ contains $r$ isomorphic connected components. 
+Let $D:=c$ and $d$ be the size of one of these connected components. For every $m$ sufficiently large, if $m \in S$, then, for any $n$, $(m+dn) \in S$, since adding copies of one of these connected components does not change the $r$-equivalence class of $\mathcal{B}$. Or
+\item A connected component is bigger than $c$. 
+In this case there is $c_4$ such that if $\norm{B} >c_4$, then $\mathcal{B}$ contains $r$ subtrees that are $r$-isomorphic and whose size is bounded by a constant. 
+Let $D$ be this constant and $d$ be the size of one of these subtrees. For every $m$ sufficiently large, if $m \in S$, then, for any $n$, $(m+dn) \in S$, since adding copies of one of these subtrees does not change the $r$-equivalence class of $\mathcal{B}$. \qedhere
+\end{itemize}
+\end{proof}
+
+\end{lem}
+
+\begin{thm} 
+\label{spectrum}
+$S$ is a spectrum involving the vocabulary $\{f\}$ iff it is ultimately periodic. 
+\begin{proof} 
+Let $S=\Spec(\psi)$ and $r=\qr(\psi)$. Let $k, D$ as in the statement of Lemma \ref{lemmaf2}
+and let $0 < d \le D$. Let $j$ be such that 
+\begin{equation} \label{good}
+\text{$0\le j<d$ and there is $m>k$ with $m \equiv j$ mod $d$ and $(m+dn)_n \subseteq S$.}
+\end{equation}
+If $j$ satisfies \ref{good} we define $m(d,j):=\min\{m : m \equiv j \text{ mod } d \text{ and } (m+dn)_n \subseteq S\}$. 
+We prove that the elements of $S$ greater than $k$ are union of sets of the form $(m(d,j)+dn)_n$ such that $0 < d \le D$ and $j$ satisfies \ref{good}. 
+This implies that $S$ is the finite union of arithmetic sequences. 
+By definition $(m(d,j)+dn)_n \subseteq S$. If $q > k$ and $q \in S$ we have to find $d, j$ such that $0<d\le D$; $j$ satisfies \ref{good}; $q \in (m(d,j)+dn)_n$. 
+Let $d$ as in the statement of the Lemma \ref{lemmaf2}, so that $(m+dn)_n \subseteq S$. 
+Let $j$ satisfy \ref{good}. $(m(d,j)+dn)_n  \equiv j$ mod $d$ and thus $m(d,j) \le q$, being the least such element. 
+But $m(d,j) \equiv q$ mod $d$, and therefore $(m+dn)_n \subseteq (m(d,j)+dn)_n$. Since $q \in (m+dn)_n$, $q \in (m(d,j)+dn)_n$. 
+
+Conversely, let $m$, $d \in \mathbb{N}$. Let $S$ be the image of the sequence $(m+dn)_n$. 
+Then $S=\Spec(\psi)$ where $\psi$ is 
+\begin{equation} \label{psi} \exists x_1 \ldots \exists x_m \forall x \left ( \bigwedge_{i<j} x_i \neq x_j \land  \bigvee_i x=x_i \lor \bigwedge_{i<d}  f^i x \neq x \land f^d x=x  \right )
+\end{equation}
+which says that except for at most $m$ points, the remaining lie on cycles of length $d$. 
+This shows that an arithmetic sequence is the spectrum of a FO $\{f\}$-sentence. Then apply Lemma \ref{lemmaf1}
+using disjunctions of sentences of the form \ref{psi}.
+\end{proof}
+\end{thm}
+
+The proof of Theorem \ref{spectrum} provides an alternative sentence witnessing that the set of positive integers divisible by $m$ is a spectrum.
+This set is clearly periodic. 
+
+\begin{rem} It is known that the sets definable in $(\mathbb{N}, +)$, Presburger arithmetic, are exactly the ultimately periodic sets. 
+Therefore $S$ is a spectrum involving $\{f\}$ iff it is definable in Presburger arithmetic. 
+\end{rem} 
+
+\section{Decidable FO Classes}%Fragments of First-Order Logic}
+
+Church's Theorem states that the set of valid FO sentences (in a vocabulary with at least one binary relation symbol) is undecidable. 
+This fact is sometimes expressed by saying that FO logic is undecidable. 
+In this section we shall show, thanks to results and tools earlier developed, that certain fragments of FO logic are decidable. 
+The strategy is to observe that, sometimes, the problem of determining whether a sentence is satisfiable reduces to the problem of establishing whether it has a finite model. 
+When this happens, i.e. when every satisfiable sentence has a finite model, we say that such a class of sentences has the \textbf{finite model property}. 
+A set of valid FO sentences $\Phi$ with the finite model property is decidable: by completeness for FO logic $\Phi$ is enumerable; but $$\Phi^c:=\{ \phi : \phi \text{ is not valid}\}=\{\phi: \lnot \phi \text{ has a finite model}\}$$ is enumerable as well, hence $\Phi$ is decidable. 
+
+\subsubsection{L\"owenheim Class}
+
+Let $\sigma=\{ P_1, \ldots, P_r\}$ be a vocabulary with a finite number of unary relations $P_i$. 
+As a consequence of Example \ref{unary}, for each $\sigma$-structure $\mathcal{A}$ and $m \ge 1$ there is a $\sigma$-structure $\mathcal{B}$ such that $\mathcal{A} \simeq_m \mathcal{B}$ and $B$ contains at most $m \cdot 2^r$ elements. 
+In particular if a $\sigma$-sentence $\phi$ with quantifier rank $m$ is satisfiable, then it is satisfiable already over a domain with at most $m \cdot 2^r$ elements. 
+Therefore 
+
+\begin{thm} Let $\sigma=\{ P_1, \ldots, P_r\}$; the set of valid $\sigma$-sentences is decidable.
+
+\end{thm}
+
+\subsubsection{G\"odel-Kalm\'ar-Sch\"utte Class}
+Let $\sigma$ be a relational vocabulary. We shall prove that the class of $\forall^2 \exists^{\ast}$-sentences involving $\sigma$ and without the equality symbol has the finite model property. 
+We shall express a necessary condition for the satisfiability of $\forall^2 \exists^{\ast}$-sentences and show with a probabilistic argument that it is sufficient for finite satisfiability. 
+In fact we shall prove a more general result, requiring additional semantic conditions; these conditions are met in our case.  
+
+Let $\psi$ be $\forall x \forall y \exists z_1 \ldots \exists z_m \phi(x,y,z_1, \ldots, z_m)$ where $\phi$ is a quantifier-free $\sigma$-sentence. 
+$\psi$ is equivalent to 
+$$\forall x \forall y \exists z_1 \ldots \exists z_m \exists v_1 \ldots \exists v_m(x \neq y \rightarrow \phi(x,x,z_1, \ldots, z_m) \land \phi(x,y,v_1, \ldots, v_m))\text{.}$$ 
+Moreover, we can impose inequalities on the variables by means of the equivalence 
+$$\exists x \exists y \phi(x,y) \invertmodels \models \exists x \exists y ((\phi(x,y) \lor \phi(x,x)) \land x \neq y)\text{,}$$
+so that we can assume that $\psi$ has the form 
+\begin{equation} 
+\label{godel_sent}
+\forall x_1 \forall x_2 \exists x_3 \ldots \exists x_m (x_1 \neq x_2 \rightarrow \phi(x_1, \ldots, x_m) )
+\end{equation}
+with $\phi(x_1, \ldots, x_m) \models x_i \neq x_j$ for $i \neq j$ and restrict our attention to structures with at least $m$ elements. 
+Call such sentences \textbf{G\"odel sentences}. 
+
+\begin{defn} Given a $\sigma$-structure $\mathcal{A}$, $a \in A$ is a \textbf{king} if there is no other element $b$ such that $\phi^0 _a = \phi^0_b$. 
+\end{defn}
+
+\begin{lem} Let $\psi$ be a $\sigma$-sentence without equality symbol.
+If $\psi$ is satisfiable it has a model with no kings. 
+\begin{proof} Suppose $\mathcal{A} \models \psi$. 
+Let $\mathcal{A} \times 2$ the structure with domain $A \times \{0,1\}$ and such that for every $k$-ary $R$ in $\sigma$ $R^{A\times 2}:=\{(a_1, i_1), \ldots, (a_k, i_k): R^A a_1 \ldots a_k\}$. 
+$\mathcal{A} \times 2 \models \psi$ and $\mathcal{A} \times 2$ has no kings.
+\end{proof}
+\end{lem}
+
+Let $\mathcal{A}$ be a $\sigma$-structure. 
+If $\rho(x_1, \ldots, x_m)$ is a type and $i$, $j$ are distinct numbers not greater than $m$, let $\rho_i(x_1)$ and $\rho_{i,j}(x_1, x_2)$ be the type of elements of $A$ and $A^2$ respectively induced by $\rho$. 
+This means that if $\rho=\phi^0 _{\mathbf{a}_m}$, then $\rho_i=\phi^0 _{a_i}$ and $\rho_{i,j}=\phi^0 _{a_i a_j}$. 
+
+\begin{defn} Let $\psi$ and $\phi$ as in \ref{godel_sent}. 
+For a $\sigma$-structure $\mathcal{A}$ let $P \subseteq \{\phi^0 _a : a \in A\}$ and $Q\subseteq \{\phi^0 _{ab} : a,b \in A\} $. $P$ and $Q$ satisfy \textbf{G\"odel criterion} for $\phi$ if 
+\begin{enumerate} 
+\item \label{godel_uno} For all $\gamma$, $\gamma' \in P$ there is $\chi \in Q$ such that $\chi_1 =\gamma$ and $\chi_2 =\gamma'$. 
+\item \label{godel_due} Every $\chi \in Q$ can be extended to $\rho(x_1, \ldots, x_m)$ such that 
+\begin{enumerate} 
+\item $\rho_{1,2}=\chi$;
+\item $\rho_{i} \in P$ for all $i=1, \ldots, m$;
+\item $\rho_{i,j} \in Q$ for all $i\neq j$ in $\{1, \ldots, m\}$;
+\item $\rho \models \phi(x_1, \ldots, x_m)$. 
+\end{enumerate}
+\end{enumerate} 
+\end{defn} 
+
+\begin{lem} Let $\psi$ as in \ref{godel_sent}. 
+If $\psi$ has a model $\mathcal{A}$ without kings then there are nonemepty $P$, $Q$ as above satisfying G\"odel criterion for $\phi$. 
+\begin{proof} It is enough to efine $P:=\{\phi^0 _a : a \in A\}$ and $Q:=\{\phi^0 _{ab} : a,b \in A \text{ and } a\neq b\} $. 
+\end{proof}
+\end{lem}
+
+Therefore in this special case G\"odel criterion is automatically fulfilled. 
+But it is also sufficient for finite satisfiability, as we now show.  
+
+\begin{thm} Let $\psi$ be a G\"odel sentence and suppose $P$, $Q$ satisfy G\"odel criterion. 
+Then $\psi$ admits a finite model.  
+\begin{proof} Order the elements of $P$ and suppose $\norm{P}=p$. 
+We shall construct probabilistically a labeled structure $\mathcal{A}$ with domain $\{1, \ldots, np\}$, for any $n \ge m$, that satisfies $\psi$. 
+\setlist[description]{font=\normalfont}
+\begin{description}
+\item[\emph{Step 1.}] If $0 \le i <n$ and $1 \le j \le p$, then every number in $\{1, \ldots, np\}$ can be written uniquely in the form $ip+j$. 
+Set $\phi^0 _{ip+j}$ the $j$-th member of $P$. 
+\item[\emph{Step 2.}] Let $1 \le a < b \le np$. By (\ref{godel_uno}) the set $\{ \chi \in Q : \chi_1=\phi^0 _a , \chi_2 =\phi^0 _b\}$ is nonempty. 
+Pick randomly $\chi$ in this set and let $\chi=\phi^0 _{ab}$. 
+\item[\emph{Step $3\le j \le m$.}] Decide whether $\mathcal{A} \models R\mathbf{x}_k [\mathbf{a}_k]$ (where $\mathbf{a}_k=(a_1, \ldots, a_k)$ has exactly $j$ distinct components) uniformly at random.  
+\item[\emph{Step $m+1, m+2, \ldots$}] Set $\mathcal{A} \models \lnot R \mathbf{x}_k [\mathbf{a}_k] $ (where $\mathbf{a}_k=(a_1, \ldots, a_k)$ has more than $m$ distinct components). 
+\end{description}
+Now, let $S_n$ be the set of all the outcomes of the above probabilistic experiment. 
+Equip $S_n$ with the uniform probability distribution $\pi$. 
+Let $s$ be the number of formulae $Rx_{i_1}\ldots x_{i_k}$ with $3 \le k \le m$ and at least three distinct components.
+Let $q:=\norm{Q}$, $r:=\binom{m}{2}-1$, $t:=q^{-r} \cdot 2^{-s}$. 
+
+\setcounter{claim}{0}
+\begin{claim} Let $\chi \in Q$, and $\rho$ be the extension whose existence is guaranteed by (\ref{godel_due}). 
+Let $\mathbf{a}_m=(a_1, \ldots, a_m)$ be distinct elements of $A=\{1, \ldots, np\}$. 
+Then $$\pi(\phi^0 _{\mathbf{a}_m}=\rho|\phi^0 _{a_1 a_2}=\chi , \phi^0 _{a_i} =\rho_i ,i=3, \ldots, m) \ge t \text{.}$$ 
+\begin{proof} 
+There are $s$ formulae $Rx_{i_1} \ldots x_{i_m}$ with at least three distinct variables and the probability that $\mathcal{A}$ satisfies each of these formulae is $2^{-1}$. 
+We can choose couples as in \emph{Step 2.} arbitrarily, provided that $\phi^0 _{a_1 a_2}=\chi$, therefore each time we choose $r$ elements from a set of $q$.  
+Therefore the probability that we have to compute is at least $t$.
+\end{proof}
+\end{claim}
+Now, let $l:=\left \lfloor{\frac{n-2}{m-2}}\right \rfloor$. 
+In particular $n -2\ge l(m-2)$.  
+\begin{claim} 
+Let $a_1, a_2$ be distinct elements of $A$. Let $H$ be the subclass of $S_n$ of $\sigma$-structures that satisfy $\lnot \exists x_3 \ldots \exists x_m \phi [a_1, a_2] $. 
+Then $\pi(H) \le (1-t)^l$.  
+\begin{proof} Let $\chi $ be any element of $Q$, and choose $\rho$ in accord with (\ref{godel_due}). 
+Let $K$ be the subclass of $S_n$ of $\sigma$-structures that satisfy $\lnot \exists x_3 \ldots \exists x_m \rho [a_1, a_2] $. 
+By G\"odel criterion it is enough to prove that $\pi(K|\phi^0 _{a_1 a_2} =\chi)\le (1-t)^l$. $A$ contains at least $n-2 \ge l(m-2)$ distinct elements $a_{i,j} \in \{1, \ldots, np\} \setminus \{a_1, a_2\} $ such that $\phi^0 _{a_{i,j}} =\rho_j$ for $i=1, \ldots, l$ and $j=3, \ldots, m$. 
+The events `$\mathcal{A} \models \rho[a_1, a_2, a_{i,3}, \ldots, a_{i,m}]$' are $l$ (because $i=1, \ldots, l$) and are independent. 
+By Claim 1 they have probability at least $t$. 
+Therefore $\pi(K|\phi^0 _{a_1 a_2} =\chi)\le (1-t)^l$. 
+\end{proof} 
+\end{claim}
+Let $M$ be the the subclass of $S_n$ of $\sigma$-structures that satisfy $\lnot \phi$. 
+$\pi(M)\le \sum_{a_1 \neq a_2} \pi(H) \le np (np-1)(1-t)^{l}  \to 0$ when $n \to \infty$. 
+Therefore the probability that $\mathcal{A} \in S_n$ satisfies $\psi$ is positive for $n$ sufficiently large. 
+\end{proof}
+\end{thm} 
+
+\section{Word Models}
+In this final section we turn our attention to regular languages and FO logic; regular languages are those strings that a finite state automaton accepts. 
+Is there a way to characterize this class of strings in purely logical terms? 
+The answer is no, if with logic we mean FO logic, as we did.  
+There are special languages, however, that are exactly those definable (in a sense made clear later) in FO logic. 
+This is going to be established using some of the finite model theoretic apparatus developed so far. 
+
+An \textbf{alphabet} is just a finite a set $S$. 
+A finite-length sequence of elements of $S$ is called \textbf{string} or \textbf{word}. 
+If $x$ is a string we write $\len{x}$ for its length. 
+$\epsilon$ is the unique string over $S$ such that $\len{\epsilon}=0$ and is called the \textbf{empty string}. 
+We denote by $S^{\ast}$ the set of strings over $S$. 
+A \textbf{language} is a subset of $S^{\ast}$. 
+We define the following operations on languages: 
+\begin{align*} 
+A \cup B &:=\{x \in S^{\ast} : x \in A \text{ or } x \in B \} \\
+AB &:=\{ xy \in S^{\ast} : x \in A, y \in B\} \\ 
+\compl A&:=\{x \in S^{\ast} : x \notin A\} \\
+A^{\ast} &:= \bigcup_{n \in \omega} A^n \text{.}
+\end{align*}
+
+\begin{defn} A \textbf{regular} language over $S$ is defined inductively as follows:
+\begin{itemize}
+\item the empty set $\emptyset$ is regular;
+\item for every $a \in S$ the language $\{a\}$ is regular;
+\item if $A$ and $B$ are regular, then $\compl A$\footnote{One can actually show that $\sim$ is redundant, but we include it here for the sake of convenience.}, $A \cup B$ and $AB$ are regular;
+\item if $A$ is regular, then $A^{\ast}$ is regular.
+%\item no other language over $S$ is regular.
+\end{itemize} 
+\end{defn}
+By convention, $\emptyset^{\ast}=\{\epsilon\}$, which is therefore a regular language. 
+
+\subsubsection{Word Models}
+Let $S$ be an alphabet and let $\tau_S$ be the vocabulary $\{<\} \cup \{P_s : s \in S\}$, where $<$ is a binary and each $P_i$ is a unary relation symbol. 
+Given a string $v=s_{1} \cdots s_{n} \in S^{\ast}$ we define a labeled $\{<\}$-structure $\mathcal{A}$ such that $\norm{A}=\len{v}$ with in addition $P^A _s:=\{i \in A : s_i=s\}$. 
+$P^A _s$ collect for each letter $s$ the positions of $v$ which carry $s$. 
+$\mathcal{A}_v=(A_v, <, (P_s)_{s\in S})$ is said to be the \textbf{word model} for $v$. 
+A fundamental remark is that if $v, w \in S^{\ast}$, a word model for $vw$ is given by $\mathcal{A}_v \triangleleft \mathcal{A}_w$.  
+
+Hopefully, an example will clarify the situation. 
+Let $S=\{a,b\}$ and $v=abbab$. Then the word model is $A=\{1,2,3,4,5\}$ equipped with the natural ordering $<$, and $P^A _a=\{1,4\}$, $P^A _b=\{2,3,5\}$.
+
+\begin{defn} Given an alphabet $S$, a language $L \subseteq S^{\ast}$ is \textbf{definable} in FO logic, if there exists a $\tau_S$-sentence $\phi$ such that $\Mod(\phi)=\{\mathcal{A}_v : v \in L\}$.  
+\end{defn}
+
+By convention, the language $\{\epsilon\}$ is defined by 
+$\forall x (x=x)$ and the language $\emptyset$ by $\exists x (x \neq x)$. $S^{\ast} \setminus \{\epsilon\}$ is defined, modulo the axioms of strict orderings, by the sentence $\phi_{\ast}$:
+$$\forall x \bigvee_{a \in S} P_a x \land \bigwedge_{a \neq b} \forall x \lnot(P_a x \land P_b x)\text{.}$$ 
+
+Not every regular language is definable in FO logic. 
+Let $S=\{a\}$. 
+$L=\{a^n : n \text{ is even}\}$ is clearly regular, but as a consequence of Example \ref{even_order} the strings $a^{2^m}$ and $a^{2^m+1}$ cannot be told apart by a sentence of quantifier rank $m$, for any $m$. 
+
+We turn to the problem of characterizing the languages definable in FO logic.
+
+\subsubsection{Star-Free Languges} 
+We saw that the class of regular languages does not overlap with the class of FO-definable languages. 
+
+\begin{rem}
+Let $\psi_{\bot}(x) $ be the sentence $\forall y (x < y \lor x=y)$ and $\psi_{\top}(x)$ be $\forall y(y <x \lor x=y)$. 
+Then 
+\begin{itemize}
+\item the empty set $\emptyset$ is definable (by definition);
+\item for every $a \in S$ the language $\{a\}$ is definable by $$\phi_{\ast} \land \exists x \forall y(y=x \land P_a x)\text{;}$$
+\item if $A$ and $B$ are definable by $\phi_A$ and $\phi_B$, then $\compl A$, $A \cup B$ and $AB$ are definable by $\phi_{\ast} \land \lnot \phi_{A}$, $\phi_{\ast} \land (\phi_{A} \lor \phi_B)$, and $$\phi_{\ast} \land \exists x \exists y \exists z (\psi_{\bot}(x) \land \psi_{\top}(z) \land \forall u (x \le u \le y \rightarrow \phi_{A}) \land \forall u (y < u \le z \rightarrow \phi_{B}))$$
+respectively. 
+\end{itemize}
+However, the difficulties that arise when trying to define $A^{\ast}$, cannot be overcome, as we shall now prove.  
+\end{rem}
+
+\begin{defn} A \textbf{star-free} regular language over $S$ is defined inductively as follows:
+\begin{itemize}
+\item the empty set $\emptyset$ is star-free regular;
+\item for every $a \in S$ the language $\{a\}$ is star-free regular;
+\item if $A$ and $B$ are regular, then $\compl A$, $A \cup B$ and $AB$ are star-free regular.
+%\item no other language over $S$ is star-free regular.
+\end{itemize} 
+\end{defn}
+
+\begin{thm} A language is star-free regular iff it is definable in FO logic.
+\begin{proof} One direction has been established in the previous remark. 
+
+To prove the other direction, we expand the vocabulary $\tau_S$ by adding the constant symbol $\{\bot\}$. We are interested only in models of $\phi_{\ast} \land \psi_{\bot}(\bot)$. 
+We prove by induction on $\phi$ that if $\{(A_v, \bot^{A_v}) : v \in L\}=\Mod(\phi_{\ast} \land \psi_{\bot}(\bot) \land \phi)$, then $L$ is star-free regular. 
+
+If $\phi$ is atomic then either $\phi$ is $\bot=\bot$ or $P_a\bot$ for some $a \in S$. 
+In the first case let $L=S^{\ast}$, in the second $L=\{a\}S^{\ast}$. 
+The argument for negation or disjunction is straightforward.
+Assume $\phi$ is $\exists x \psi (x)$. Clearly 
+\begin{multline*}
+\Mod(\phi_{\ast} \land \psi_{\bot}(\bot) \land \exists x \psi (x))=\\ \Mod(\phi_{\ast} \land \psi_{\bot}(\bot) \land \psi (\bot)) \cup \Mod(\phi_{\ast} \land \psi_{\bot}(\bot) \land \exists x (x\neq \bot \land \psi (x)))\text{.}
+\end{multline*}
+The first member of the union, by inductive hypothesis, describes a star-free language. 
+We can think of the second member as the class of finite $\tau_S \cup \{\bot, c\}$-structures $\mathcal{A}$ such that 
+$(A, \bot^A, c^A) \models \phi_{\ast} \land \psi_{\bot}(\bot) \land c\neq \bot \land \psi (c)$. 
+Such structures can be written as $\mathcal{A} = \mathcal{A}_1 \triangleleft \mathcal{A}_2$ where $(A_1, \bot^{A_1}) \models \phi_{\ast} \land \psi_{\bot}(\bot)$ and $(A_2, c^{A_2}) \models \phi_{\ast} \land \psi_{\bot}(c)$. 
+Now, let $\phi^m _{\mathcal{A}_1}$ and $\phi^m _{\mathcal{A}_2}$  be the suitable $m$-types. 
+By Remark \ref{sums} the fact that $$\mathcal{A}_1 \models \phi_{\ast} \land \psi_{\bot}(\bot) \land \phi^m _{\mathcal{A}_1} \quad \text{ and } \quad \mathcal{A}_2 \models \phi_{\ast} \land \psi_{\bot}(c) \land \phi^m _{\mathcal{A}_2}$$ implies that $\mathcal{A}_1 \triangleleft \mathcal{A}_2 \models \psi(c)$. 
+But by inductive hypothesis 
+$$\phi_{\ast} \land \psi_{\bot}(\bot) \land \phi^m _{\mathcal{A}_1} \quad \text{ and } \quad  \phi_{\ast} \land \psi_{\bot}(c) \land \phi^m _{\mathcal{A}_2}$$ define star-free languages $L_1$, $L_2$. 
+Take $L:=L_1L_2 $ to complete the proof. 
+\end{proof}
+\end{thm}
