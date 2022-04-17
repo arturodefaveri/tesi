@@ -1,0 +1,276 @@
+\chapter{Probabilities}
+
+Let $\tau$ be a relational vocabulary. 
+The reader may think of a $\tau$-structure as a bunch of dots each carrying a specific number, i.e. a structure with domain $\{1, 2, \ldots, n\}$. 
+This is a \textbf{labeled} structure. 
+For example, when $\tau=\{E\}$, where $\{E \}$ is a binary relation symbol, an $\{E\}$-structure is a \textbf{digraph}\footnote{A digraph is a $\{E\}$-structure, where $E$ is a binary relation symbol. 
+We can think of a digraph as a graph where links are arrows and a vertex can be linked to itself}. 
+If you assign the value $i$ to the variable $x_i$, then the digraph satisfies $Ex_i x_j$ if there as an arrow from $i$ to $j$.
+
+Suppose we decide if $i_1, \ldots, i_m \in \{1,\ldots,n\}$ are in the $m$-ary relation $R$ by tossing a (fair) coin, that is suppose you construct a finite \textbf{random structure}. 
+For example, in the case of digraphs, we may want to know how frequently a random structure has an isolated point, that is to say, how frequently satisfies the sentence 
+$$ \exists x_1 \forall x_2 (\lnot Ex_1 x_2 \land \lnot Ex_2 x_1) \text{.}$$
+Another way to look at your problem is to consider the ratio of the number of $\{E\}$-structures with an isolated vertex and the number of $\{E\}$-structures (\textit{over $n$ vertices}) overall. 
+Does this ratio admit a limit, as $n \to \infty$? 
+
+To start with, there are $ 2 ^{n^2}$ labeled $\{E\}$-structures. 
+Besides, there are $n$ ways to choose an isolated vertex and $2 ^{(n-1)^2}$ ways to link the remaining. 
+Therefore
+$$ \lim_{n \to \infty} \frac{n \cdot 2 ^{(n-1)^2}}{2 ^{n^2}}=0\text{,} $$
+concluding that almost no finite digraph has an isolated vertex.  
+
+We started with a property of relational structures expressible in FO logic. 
+In theory, with a similar calculation one could investigate the frequency of such properties by hand. 
+This is generally hard. 
+However, there is a theoretical result lying behind: for each FO sentence $\psi$, almost every finite random structure satisfies $\psi$ or almost every structure satisfies $\lnot \psi$ (i.e. the above limit is always $1$ or $0$).
+
+\section{Extension Axioms}
+Fix a relational vocabulary $\tau$ and $r\ge 0$. Let $\Delta_{r+1} ^{\tau}$ be the collection of formulas in $L_{r+1}[\tau]$ of the kind $Rx_{i_1} \ldots x_{i_m}$ (when $R$ is $m$-ary) and such that $r+1 \in \{i_1, \ldots, i_m\}$.
+With a subset $\Phi$ of $\Delta_{r+1} ^{\tau}$ we associate a formula $\gamma_{\Phi}$ in $L_{r+1}[\tau]$ (called \textbf{complete description}) given by 
+$$\bigwedge_{\phi \in \Phi} \phi \land \bigwedge_{\phi \in \Phi^c} \lnot \phi \text{,}$$
+where $\Phi^c := \Delta_{r+1} ^{\tau} \setminus \Phi$. 
+The sentence (dependent on $\Phi$ and $r$) $\chi_{\Phi}$ 
+$$\forall x_1 \cdots \forall x_r \left ( \bigwedge_{i < j} x_i \neq x_j \rightarrow \exists x_{r+1} \left ( \bigwedge_{i} x_i \neq x_{r+1} \land \gamma_{\Phi} \right ) \right )$$ 
+is called $(r+1)$-\textbf{extension axiom}. 
+
+For a class $K$ of labeled structures, let $L_n(K)$ be the number of labeled structures in $K$ whose domain has $n$ elements. 
+We shall also write $L_n(\phi)$ and $L_n(\tau)$ for the number of models of $\phi$ and the number of $\tau$-structures whose domain has $n$ elements. 
+
+\begin{defn} 
+\label{def_prob}
+We shall call 
+$$\lambda_n(K):=\frac{L_n(K)}{L_n(\tau)} $$ the \textbf{labeled probability} of $K$ and $$\lambda(K):=\lim_{n \to \infty} \lambda_n(K)\text{,}$$ if it exists, the \textbf{labeled asymptotic probability} of $K$. 
+The obvious adjustments have to be done for $L_n(\phi)$. 
+\end{defn}
+
+Recall the probabilistic experiment we mention at the beginning of the chapter.
+$\lambda_n(K)$ is the probability that the outcome belongs to a given class $K$. 
+In particular $\lambda_n(\phi)$ is the probability that the outcome satisfies $\phi$. 
+
+\begin{defn} 
+\label{def_cond}
+If $K$ and $H$ are classes of structures we define the \textbf{conditional} labeled probability of $K$ given $H$ by 
+$$\lambda_n(K|H):=\frac{L_n(K \cap H)}{L_n(H)}$$
+and, if it exists, the asymptotic conditional labeled probability by 
+$$\lambda(K|H)=\lim_{n \to \infty} \lambda_n(K|H) \text{.}$$
+Notations such as $\lambda_n(\phi|H)$ should be clear. 
+\end{defn}
+
+\begin{lem}
+\label{extension}
+Every extension axiom has asymptotic probability one.
+\begin{proof} Let $\mathcal{A}$ be a $\tau$-structure with $n$ elements. Fix $\Phi \subseteq \Delta_{r+1}^ \tau$ and a sequence $\mathbf{a}_r$ of distinct elements in $A^r$. 
+Let $a \notin A$: we need a different object if we want our structure to satisfy $\chi_{\Phi}$. 
+Toss a fair coin to decide whether, for any $a_{i_1},\ldots, a_{i_m}$ made up of elements of $A \cup \{a\}$, $R^{A \cup \{a\}} a_{i_1} \ldots a_{i_m}$ holds or not ($R$ is $m$-ary). 
+If $\lVert \Delta_{r+1} \rVert = k$, the probability that $\mathbf{a}_r a$ satisfies $\gamma_{\Phi}$ is $2^{-k}$. 
+We prove that $\lambda (\lnot \chi_{\Phi})=0$. 
+$\lnot \chi_{\Phi}$ is 
+$$\exists x_1 \cdots \exists x_r \left (\bigwedge_{i<j} x_i \neq x_j \land \forall x_{r+1} \left (\bigvee_{i=1} ^r x_i = x_{r+1} \lor \lnot \gamma_{\Phi}\right)\right) \text{.}
+$$
+By hypothesis $a$ is different than the $\mathbf{a}_r$. 
+We just need to evaluate the probability that 
+$$\exists x_1 \cdots \exists x_r \left (\bigwedge_{i<j} x_i \neq x_j \land \forall x_{r+1} \left ( \lnot \gamma_{\Phi}\right)\right) \text{:}
+$$
+$\lambda_n(\lnot \chi_{\Phi}) \le n^r (1-2^{-k})^{n-r} \to 0$ as $ n \to \infty$ as desired.
+\end{proof}
+\end{lem} 
+
+\section{The Random Structure Theory}
+Letting $r$ be $0, 1, 2, \ldots$ all the $({r+1})$-extension axioms form a theory, $T$, that we shall call \textbf{random structure theory}.
+
+Since for every $r$ points, a $(r+1)$-th point is required to exist, every model of $T$ is surely infinite. 
+
+We prove that any two models $\mathcal{A}$ and $\mathcal{B}$ of $T$ are $\omega$-isomorphic: $\mathcal{A} \simeq_{\omega} \mathcal{B}$. 
+We let $(I_n)_n $ be the constant sequence $I := \{\mathbf{a}_r \mapsto \mathbf{b}_r \}$ such that $\mathbf{a}_r $ and $ \mathbf{b}_r$ have the same type. We prove that $I$ has the back- and the forth-property. 
+Pick $a \in A \setminus \{a_1, \ldots, a_r\}$. 
+Let 
+$\Phi :=\{ \psi \in \Delta_{r+1} : \mathcal{A} \models \psi[\mathbf{a}_r,a] \}$. 
+Since $\mathcal{B} \models \chi_{\Phi}$ there is $ b \in B$ such that $\mathbf{a}_r a \mapsto \mathbf{b}_r b$, and $\mathbf{a}_r a$ and $\mathbf{b}_r b$ have the same type. 
+(The same for the back-property). 
+Therefore, any two models of $T$ are elementarily equivalent, and thus $T$ is complete.
+
+Furthermore, we show that $T$ has a countable model (proving at once that $T$ is satisfiable and admits only one countable model). 
+We construct an infinite random structure $\mathcal{R}$ with domain $\omega$. Decide by coin-tossing whether $\mathcal{R} \models R i_1 \ldots i_m$ for every $i_1, \ldots, i_m \in \omega$. 
+With probability one the outcome satisfies each extension axiom $\chi_{\Phi}$: we've already proved that for some given finite set $\mathbf{n}_r \subset \omega^r, \lambda(\lnot \chi_{\Phi})=0 $, but $r$ varies in $\omega$, thus there are only countably many of these sets, and it's a simple lemma of measure theory that the countable union of null sets is null. 
+
+\section{Labeled 0-1 Law}
+Lemma \ref{extension} yields: 
+\begin{cor} Let $\psi$ be a FO sentence. 
+If $T \models \psi$, $\lambda(\psi)=1$; if $T \models \lnot \psi$, $\lambda(\psi)=0$.
+\begin{proof} If $T \models \psi$, by compactness, there is a finite subset of $T$, $T_0 :=\{\sigma_1, \ldots, \sigma_n\}$, such that $T_0 \models \psi$.
+For every $i=1, \ldots, n$, $\lambda(\sigma_i)=1$. 
+But then 
+$$1= \lambda(\sigma_1) \le \lambda(\sigma_1 \land \cdots \land \sigma_n) \le \lambda(\psi) \text{.} $$
+If $T \models \lnot \psi$, $\lambda(\lnot \psi)=1$ and $\lambda(\psi)=0$. 
+\end{proof} 
+\end{cor}
+
+\begin{defn} We say that a set of sentences $\Psi$ obeys the \textbf{zero-one law} if for every $\psi \in \Psi$, $\lambda(\psi)=0$ or $\lambda(\psi)=1$.
+\end{defn} 
+
+Since $T$ is complete we conclude that the set of FO sentences constructed with a relational vocabulary obeys the zero-one law. 
+
+The reader may be wondering why we need to stick to a relational vocabulary. 
+Well, there's a huge difference between algebraic and relational structures. 
+For example, think about finite groups; it's not true that a group $\mathcal{G}$ is almost certainly abelian (a property expressible in FO logic) or not-abelian, as $\lVert G \rVert \to \infty$. 
+Here's a formal counterexample: fix the vocabulary $\{f\}$, where $f$ is a unary function symbol. 
+Consider the sentence $ \lnot \exists x f x = x$, stating that $f$ doesn't have fixed-points. 
+Choose a number from $\{1, \ldots, n\}$; $f(x)$ can be anything provided that $f(x) \neq x$. 
+Then $f(x)$ can be chosen among a set with $n-1$ elements. 
+Therefore 
+$$\lambda_n (\lnot \exists x f x = x) = \frac{(n-1)^n}{n^n} = \left ( 1- \frac{1}{n} \right )^n \to \frac{1}{e}  $$
+as $n \to \infty$. 
+
+\begin{cor} Every finite subset $T_0$ of $T$ has a finite model: there is $k$ such that for every $n > k$, $T_0$ has a model with $n$ elements. 
+\begin{proof} Suppose $T_0 :=\{\sigma_1, \ldots, \sigma_m\}$. For every $i=1, \ldots, n$ there is $k$ such that $\lambda_n (\lnot \sigma_i) < 1/ m$. Then 
+
+$$\lambda_n(\lnot \sigma_1 \lor \cdots \lor \lnot \sigma_m) \le \lambda_n(\lnot \sigma_1) + \cdots + \lambda_n(\lnot \sigma_m) <1 $$
+
+and $\lambda_n(\sigma_1 \land \cdots \land \sigma_m) >0$ (so $L_n(\sigma_1 \land \cdots \land \sigma_m) >0$). 
+\end{proof} 
+\end{cor}
+
+This corollary allows us to prove an interesting fact. 
+Two finite random structures $\mathcal{A}$, $\mathcal{B}$ are almost certainly $m$-isomorphic when $\lVert A \rVert, \lVert B \rVert \to \infty $. 
+Recall that $\mathcal{A} \simeq_m \mathcal{B}$ iff $\mathcal{B} \models \phi_{\mathcal{A}} ^m$. 
+Let $A = \{1,...,n\}$, $B = \{1,...,k\}$ and $p(n,k)$ the probability that $\mathcal{A} \simeq_m \mathcal{B}$. 
+Since we are interested in the asymptotic behavior of $p(n,k)$ we can assume that $n$ and $k$ are sufficiently large. 
+Now, since $T$ is complete, $T \models \phi_{\mathcal{A}} ^m$  or $T \models \lnot \phi_{\mathcal{A}} ^m$. 
+Suppose the latter. 
+Then, by compactness, for a finite subset $T_0 \subset T$, $T_0 \models \lnot \phi_{\mathcal{A}} ^m$. 
+By the previous corollary, $\mathcal{A} \models T_0$. 
+Thus a a contradiction arises unless $T \models \phi_{\mathcal{A}} ^m$. 
+We conclude that $p(n,k) \to 1$ as $n,k \to \infty$.
+
+\section{Unlabeled 0-1 Law} 
+If $\mathcal{A}, \mathcal{B}$ are two $\tau$-labeled structures with $n$ elements, let $\mathcal{A} \sim \mathcal{B}$ if $\mathcal{A} \simeq \mathcal{B}$. An equivalence class for $\sim$ is called \textbf{unlabeled} structure. 
+Let $U_n(K)$ be the number of unlabeled structures in $K$. 
+Definition \ref{def_prob} and \ref{def_cond} can be restated for the unlabeled case substituting $U$ and $\upsilon$ for $L$ and $\lambda$, respectively. 
+
+In this section we want to prove that FO logic obeys the unlabeled 0-1 law as well. Recall that a structure is \textbf{rigid} if the identity is its only automorphism. 
+We write $\Rig$ for the class of rigid structures.
+Our strategy will be to to show that if almost all structures are rigid then the labeled and unlabeled asymptotic probabilities coincide; if the vocabulary $\tau$ contains at least a binary relation symbol, almost all $\tau$-structures are rigid. The case of unary vocabularies will be handled separately. 
+
+Clearly, $L_n(K) \le U_n(K) \cdot n!$.
+Thus, since
+$$\frac{U_n(\Rig \cap K) \cdot n!}{U_n(\Rig \cap K) \cdot n! + U_n(\Rig^c \cap K) \cdot n!} \le \frac{L_n(\Rig \cap K) }{L_n(\Rig \cap K) +L_n(\Rig^c \cap K) } $$ 
+for any class $K$, 
+\begin{equation}
+\label{ineq}
+\upsilon_n(\Rig|K) \le \lambda_n (\Rig|K)
+\end{equation}
+ 
+\begin{lem} 
+\label{equiv}
+Let $K$ be a class of structures. 
+$\upsilon(\Rig|K)=1$ iff $$\lim_{n \to \infty} \frac{L_n(K)}{U_n(K) \cdot n!}=1\text{.}$$
+\begin{proof} The following holds: 
+$$\frac{L_n(K)}{U_n(K) \cdot n!} = \frac{L_n(K \cap \Rig)}{U_n(K) \cdot n!}+\frac{L_n(K\cap \Rig^c)}{U_n(K) \cdot n!}=\upsilon_n(\Rig|K)+\frac{L_n(K\cap \Rig^c)}{U_n(K) \cdot n!}\text{.}$$
+Therefore, if $\upsilon(\Rig|K)=1$, then the left hand side tends to $1$; since $\upsilon_n(\Rig|K) \le \upsilon_n(\Rig|K) +\frac{1}{2} \upsilon_n(\Rig^c|K) =1-\frac{1}{2} \upsilon_n(\Rig^c|K)$, if the left hand side tends to $1$, $\upsilon(\Rig^c|K)=0$.
+\end{proof}
+\end{lem} 
+
+\begin{rem}
+\label{burnside} 
+The following useful fact is Burnside's lemma restated in our context.
+Let $\mathcal{A}$, $\mathcal{B}$ be $\tau$-structures with domain $A=B=\{1, \ldots, n\}$ and $\pi$ be a permutation of $A$. 
+Let 
+$$\Str(\pi):=\{\mathcal{A} \text{ such that } \pi : \mathcal{A} \simeq \mathcal{A}\} \quad \text{ and }  \quad \Aut(\mathcal{A}):=\{ \pi \text{ such that } \pi : \mathcal{A} \simeq \mathcal{A}\}\text{,}$$ the latter being a subgroup of $\Sym(A)$. 
+$$\sum_{\mathcal{B} : \mathcal{B} \simeq \mathcal{A}}\norm{\Aut(\mathcal{B})}=\norm{\{\mathcal{B} : \mathcal{B} \simeq \mathcal{A}\}}\cdot \norm{\Aut(\mathcal{A})}=n!$$ and $U_n(\tau)$ is the number of equivalence classes of the relation $\mathcal{A} \simeq \mathcal{B}$. 
+Hence $U_n(\tau) \cdot n!=\sum_{\mathcal{B}} \norm{\Aut(\mathcal{B})}=\sum_{\pi} \norm{\Str(\pi)}$.
+\end{rem} 
+
+\begin{lem} 
+\label{rigidity} Let $K$ be a class of $\tau$-structures where $\tau$ contains at least one $k$-ary relation symbol, with $k>1$. 
+Then $\upsilon(\Rig|K)=1$.
+\begin{proof} We'll show more, i.e. that $\upsilon(\Rig)=1$. 
+We shall employ Lemma \ref{equiv} and show that $$\lim_{n \to \infty} \frac{U_n(\tau) \cdot n!}{L_n(\tau)}=1\text{.}$$
+Let $\tau=\{R^1 _1, \ldots, R^1 _{u_1}, \ldots , R^t _{1}, \ldots, R^t _{u_t}\}$, i.e. $\tau$ contains $u_1$ unary relation symbols, \ldots, $u_t$ $t$-ary relation symbols, with $t>1$ and $u_t >0$. 
+The number of labeled $\tau$-structures is 
+\begin{equation} 
+\label{eq_1}
+L_n(\tau)=2^{u_1 n} \cdots 2^{u_t n^t}=2^{\sum_{i=1}^t u_i n^i}\text{.}
+\end{equation}
+In the notation of Remark \ref{burnside} each permutation $\pi$ of $A$ induces a permutation $\pi_i$ on $A^i$ by letting $\pi_i(a_1,\ldots, a_i):=(\pi(a_1),\ldots, \pi(a_i))$. 
+Define $c_i(\pi)$ to be the number of cycles (including singletons) in the cyclic decomposition of $\pi_i$. 
+If $\pi \in \Aut(\mathcal{A})$ and $(\mathbf{a}^1 _i, \ldots, \mathbf{a}^k _i)$ is one of the $c_i(\pi)$ cycles that form $\pi_i$, then
+$$ R^{A,i} _j \mathbf{a}^1 _i \text{ iff } \cdots \text{ iff } R^{A,i} _j \mathbf{a}^k _i$$ 
+so that $R^{A,i} \mathbf{a} _i$ for all elements of the cycle or for none. 
+Thus 
+\begin{equation}
+\label{eq_2}
+\norm{\Str(\pi)}=2^{\sum_{i=1} ^t u_i c_i(\pi)} \text{.}
+\end{equation}  
+Remembering by Remark \ref{burnside} that $U_n(\tau) \cdot n!=\sum_{\pi} \norm{\Str(\pi)}$ and combining \ref{eq_1} and \ref{eq_2} we get 
+$$\frac{U_n(\tau) \cdot n!}{L_n(\tau)}=\frac{\sum_{\pi}\norm{\Str(\pi)}}{2^{\sum_{i=1}^t u_i n^i}} =\sum_{\pi} 2^{\sum_{i=1} ^t u_i (c_i(\pi)-n^i)}\text{.}$$
+If $\pi$ is the identity, $c_i(\pi)=n^i$ for every $i$. 
+Therefore we have to show that when $n \to \infty$, 
+$$\sum_{\pi \neq \id} 2^{\sum_{i=1} ^t u_i (c_i(\pi)-n^i)} \to 0\text{.}$$
+Now, let $\supp(\pi):=\{a \in A: \pi(a) \neq a\}$, and $s(\pi):=\norm{\supp(\pi)}$. 
+If $s(\pi)=m$, then $s(\pi_i) \le mn^{i-1}$: if $a \in \supp(\pi)$, then $(a, a_{1}, \ldots, a_{i-1}) \in \{a\}\times A^{i-1}$ is not fixed by $\pi_i$. 
+There are $n^{i-1}$ such elements. 
+Moreover, since any $a \in A \setminus \supp(\pi)$ constitutes the cycle $(a)$, and the cycle of any other element of $\supp(\pi)$ has at least two elements, $c_i (\pi) \le n^i - \frac{s(\pi)}{2}$. 
+Therefore we conclude that $c_i(\pi) \le n^i - \frac{s(\pi) \cdot n^{i-1}}{2}$. 
+Thus
+$$\sum_{\pi \neq \id} 2^{\sum_{i=1} ^t u_i (c_i(\pi)-n^i)} \le \sum_{\pi \neq \id} 2^{-\frac{1}{2}s(\pi)n^{i-1}}\text{.}$$
+The number of permutations $\pi$ such that $s(\pi)=m$ is $\binom{n}{m} \cdot m!=\frac{n!}{(n-m)!}\le n^m$, so 
+$$\sum_{\pi \neq \id} 2^{-\frac{1}{2}s(\pi)n^{i-1}} \le \sum^n _{m=2} n^m 2^{-\frac{1}{2}mn^{i-1}}= \sum^n _{m=2} 2^{-\frac{1}{2}m (n^{i-1} -2 \log_2 n)} \le (n-1) \cdot 2^{-(n-2 \log_2 n)}\text{,}$$
+where the last inequality holds since $m=2$ gives the largest summand of the preceding sum. 
+Note also that there are no permutations $\pi$ with $s(\pi)=m=1$. 
+Since $2^{-(n-2 \log_2 n)} \to 0$ as $n \to \infty$ the result is proved.
+\end{proof}
+\end{lem} 
+
+\begin{thm} Let $H$ be a class of structures. If $\upsilon(\Rig|H)=1$, then for any class $K$ $\lambda(K|H)=\upsilon(K|H)$. 
+\begin{proof} If $\upsilon(\Rig|H)=1$, then $\lambda(\Rig|H)=1$ by \ref{ineq}. By assumption $\lambda(K|H)=\lambda(K|\Rig \cap H)$ and $\upsilon(K|H)=\upsilon(K|\Rig \cap H)$. But $\lambda_n(K|\Rig \cap H)=\upsilon_n(K|\Rig \cap H)$ since 
+$$\frac{L_n(K \cap \Rig \cap H)}{L_n(\Rig \cap H)}=\frac{U_n(K \cap \Rig \cap H) \cdot n!}{U_n(\Rig \cap H) \cdot n!}$$ again by \ref{ineq}.
+\end{proof}
+\end{thm} 
+
+Thus, if we prove that the labeled and unlabeled probabilities coincide also in the case of the `special' vocabulary, we get that FO obeys the unlabeled 0-1 law as well. 
+
+\begin{lem} Let $\tau=\{P_1, \ldots, P_k\}$, where each $P_i$ is a unary relation symbol.
+Then every $\tau$ sentence $\phi$ satisfies the 0-1 law. 
+\begin{proof} 
+Every $\tau$-sentence is equivalent to the negation or boolean combination of sentences of the form $\exists ^{=l} x P^{\alpha} x$. 
+Thus, without loss of generality we can assume that $\phi$ is $\exists ^{=l} x P^{\alpha} x$. 
+How many unlabeled $\tau$-structures $\mathcal{A}$ satisfy $\phi$? $\alpha$ partition $A=\{1, \ldots, n\}$ into $2^k$ sets, and each $\alpha$ completely characterizes $\mathcal{A}$ up to isomorphism. 
+Since one has to choose $n-l$ elements from a set of $2^k -1$ (one member of the partition is fixed) and repetitions are allowed
+$$U_n(\phi)=\binom{2^k -2 + n-l}{2^k-2} \text{,}$$ which is a polynomial in $n$ of degree $2^k-2-l$. 
+Moreover, since one has to choose $n$ elements from a set of $2^k$ with repetitions, the number of unlabeled $\tau$-structures is 
+$$U_n(\tau)=\binom{2^k -1 + n}{2^k-1} \text{,}$$ which is a polynomial in $n$ of degree $2^k-1$.
+Therefore $\upsilon(\phi)=0$. 
+
+If $\phi$ is $\lnot \exists ^{=l} x P^{\alpha} x$, clearly $\upsilon(\phi)=1$. Finally, if every conjunct of a conjunction of sentences of the form $\exists ^{=l} x P^{\alpha} x$ or $\lnot \exists ^{=l} x P^{\alpha} x$ has probability $1$, then the conjunction has probability $1$; and, analogously, if at least a disjunct has probability $1$, then the disjunction has probability $1$. 
+\end{proof}
+\end{lem}
+
+Note that, since any model of the random theory $T$ is infinite, $\lambda(\lnot \exists ^{=l} x P^{\alpha} x)=1$. 
+Similar considerations apply to the other cases. 
+Therefore $\lambda$ and $\upsilon$ agree on every $\tau$-sentence when $\tau=\{P_1, \ldots, P_k\}$. 
+
+Thus we have: 
+
+\begin{thm} If $\tau$ is relational, then every FO sentence $\psi$ involving $\tau$ satisfies the unlabeled 0-1 law. Moreover $\lambda$ and $\upsilon$ agree on $\psi$. 
+\end{thm}
+
+\subsubsection{An Interesting Remark} 
+The random structure constructed as in the first section on the vocabulary $\{E\}$ and satisfying the axioms for graphs is called (countable) \textbf{random graph} and denoted by $\mathcal{R}_{\mathsf{Graph}}$. 
+$\mathcal{R}_{\mathsf{Graph}}$ is, modulo the theory of graphs, the unique $\{E\}$-structure satisfying 
+\begin{equation} 
+\label{random}
+\forall x_1 \ldots \forall x_n \forall x_{n+1} \ldots \forall x_{2n} \left ( \bigwedge_{i <j} x_i \neq x_j \rightarrow \exists x \left( \bigwedge_{i\le n} Exx_i \land \bigwedge_{n <i } \lnot Exx_i \right) \right)
+\end{equation}
+for every $n \ge 1$. We shall denote the theory of graphs plus \ref{random} by $T_{\mathsf{Graph}}$. 
+
+As we showed, the property of being connected is not expressible in FO logic, even if we restrict ourselves to finite graphs. 
+However, there is a property that almost all finite graphs have, and that implies connectedness. 
+The sentence $$\exists x \exists y \lnot Exy \land \forall x \forall y \exists z (Exz \land Eyz)$$ is implied by $T_{\mathsf{Graph}}$, and therefore $\mathcal{R}_{\mathsf{Graph}}$ and almost any finite graph is a model of it. 
+
+\begin{comment}
+It is a clear consequence of Lemma \ref{rigidity} that almost all finite graphs are rigid. 
+However, $\mathcal{R}_{\mathsf{Graph}}$ is not rigid. 
+In fact it is \textbf{homogeneous}: every isomorphism between finite induced subgraphs can be extended to an automorphism\footnote{$\Aut(\mathcal{R}_{\mathsf{Graph}})$, far from being trivial, is known to have size $2^{\aleph_0}$.}. 
+Suppose that $p_0: \mathbf{a}_r \mapsto \mathbf{b}_r$ is an isomorphism between two finite induced subgraphs of $\mathcal{R}_{\mathsf{Graph}}$ and let $a_{r+1}$ be a distinct vertex of $\mathcal{R}_{\mathsf{Graph}}$. 
+If $S$ is the set of vertices among $\mathbf{a}_r$  linked to $a_{r+1}$ and $T$ the set of vertices among $\mathbf{a}_r$ not linked to $a_{r+1}$, then by \ref{random} we can map $a_{r+1}$ to $b_{r+1}$ so that $b_{r+1}$ is linked to every vertex in $p_0(S)$ and not linked to every vertex of $p_0(T)$. Then applying Lemma \ref{partial_implies_iso} we obtain the desired result. 
+\end{comment}
